@@ -13,7 +13,6 @@ orientation = portrait
 
 requirements = python3,kivy==2.2.1,android
 
-requirements = python3,kivy==2.2.1,android
 
 # ⬇️ NDK 必须认怂，锁死在 25b 保证能编译成功 ⬇️
 android.ndk = 25b
