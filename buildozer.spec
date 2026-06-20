@@ -13,7 +13,8 @@ orientation = portrait
 
 requirements = python3,kivy==2.2.1,android
 
-android.ndk = 23c
+# 🔥 关键修改：从 23c 换成 28c（推荐版本）
+android.ndk = 28c
 android.sdk = 30
 android.api = 30
 android.minapi = 21
