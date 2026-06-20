@@ -2,26 +2,32 @@ name: Build APK
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
-  build-android:
-    name: Build for Android
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
-        with:
-          command: buildozer android debug
-          workdir: .
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool libffi-dev cmake
+          pip install buildozer cython
 
-      - name: Upload artifacts
+      - name: Build APK
+        run: |
+          # 解决许可证和 root 权限问题
+          mkdir -p ~/.android
+          echo "### User Accepted Licenses" > ~/.android/repositories.cfg
+          export BUILDOZER_WARN_ON_ROOT=0
+          buildozer android debug
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: kivy-apk
+          name: myrobot0327-apk
           path: bin/*.apk
