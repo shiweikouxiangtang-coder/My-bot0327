@@ -32,14 +32,9 @@ jobs:
 
       - name: Build APK
         run: |
-          # 解决许可证问题（你找到的办法）
           mkdir -p ~/.android
-          touch ~/.android/repositories
-          # 解决root权限问题（你找到的办法）
-          export BUILD_ZOZER_WARN_ON_ROOT=0
-          # 避免路径冲突
-          export ANDROID_SDK_ROOT=$HOME/.buildozer/android/platform/android-sdk
-          export ANDROID_NDK_ROOT=$HOME/.buildozer/android/platform/android-ndk-r23c
+          echo "### User Accepted Licenses" > ~/.android/repositories.cfg
+          export BUILDOZER_WARN_ON_ROOT=0
           buildozer android debug
 
       - name: Upload APK
