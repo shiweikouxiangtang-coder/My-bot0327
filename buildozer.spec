@@ -18,13 +18,13 @@ requirements = python3,kivy==2.2.1,android
 android.ndk = 25b
 
 # ⬇️ API/SDK 紧跟 2026 年要求，提升到 35 ⬇️
-android.sdk = 35
-android.api = 35
-android.targetsdk = 35
+android.sdk = 34
+android.api = 34
+android.targetsdk = 34
 # 考虑到向下兼容，最低支持到 Android 5.0 (API 21) 或 7.0 (API 24)
 android.minapi = 21
 
-android.build_tools = 35.0.0
+android.build_tools = 34.0.0
 android.accept_sdk_license = True
 
 
