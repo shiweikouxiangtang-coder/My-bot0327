@@ -1,4 +1,4 @@
-name: Build Kivy APK (Fast)
+name: Build APK
 
 on:
   push:
@@ -6,23 +6,22 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-android:
+    name: Build for Android
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Build APK
-      uses: iamromulan/build-kivy-apk@v1
-      with:
-        requirements: python3,kivy==2.2.1,android
-        package_name: myrobot0327
-        package_domain: com.github.shiewikou
-        version: 1.0.0
-        title: 金小约                    # ← 已改为你的软件名
-        permissions: INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
+      - name: Build with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
+        with:
+          command: buildozer android debug
+          workdir: .
 
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: myrobot0327-apk
-        path: bin/*.apk
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: kivy-apk
+          path: bin/*.apk
