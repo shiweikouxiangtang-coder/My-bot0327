@@ -13,15 +13,21 @@ orientation = portrait
 
 requirements = python3,kivy==2.2.1,android
 
-# 🔥 关键修改：从 23c 换成 28c（推荐版本）
-android.ndk = 28c
-android.sdk = 30
-android.api = 30
-android.minapi = 21
-android.targetsdk = 30
+requirements = python3,kivy==2.2.1,android
 
-android.build_tools = 30.0.3
+# ⬇️ NDK 必须认怂，锁死在 25b 保证能编译成功 ⬇️
+android.ndk = 25b
+
+# ⬇️ API/SDK 紧跟 2026 年要求，提升到 35 ⬇️
+android.sdk = 35
+android.api = 35
+android.targetsdk = 35
+# 考虑到向下兼容，最低支持到 Android 5.0 (API 21) 或 7.0 (API 24)
+android.minapi = 21
+
+android.build_tools = 35.0.0
 android.accept_sdk_license = True
+
 
 android.permissions = INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
