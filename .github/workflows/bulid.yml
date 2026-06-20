@@ -16,18 +16,34 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Cache buildozer
+        uses: actions/cache@v4
+        with:
+          path: ~/.buildozer
+          key: ${{ runner.os }}-buildozer-${{ hashFiles('buildozer.spec') }}
+          restore-keys: |
+            ${{ runner.os }}-buildozer-
+
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y git zip unzip openjdk-17-jdk
+          sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool libffi-dev cmake
           pip install buildozer cython
 
       - name: Build APK
-        run: buildozer android debug
+        run: |
+          # 解决许可证问题（你找到的办法）
+          mkdir -p ~/.android
+          touch ~/.android/repositories
+          # 解决root权限问题（你找到的办法）
+          export BUILD_ZOZER_WARN_ON_ROOT=0
+          # 避免路径冲突
+          export ANDROID_SDK_ROOT=$HOME/.buildozer/android/platform/android-sdk
+          export ANDROID_NDK_ROOT=$HOME/.buildozer/android/platform/android-ndk-r23c
+          buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: myrobot0327-apk
           path: bin/*.apk
-    
