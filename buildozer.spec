@@ -31,3 +31,7 @@ android.accept_sdk_license = True
 android.permissions = INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
 log_level = 2
+
+[buildozer]
+# 必须加上这一行，强制优化编译逻辑，防止在 Android 环境下崩掉
+p4a.extra_args = --use-setup-py
