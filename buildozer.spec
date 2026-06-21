@@ -13,25 +13,23 @@ orientation = portrait
 
 requirements = python3,kivy==2.2.1,android
 
-
-# ⬇️ NDK 必须认怂，锁死在 25b 保证能编译成功 ⬇️
+# NDK and SDK versions - locked for stability
 android.ndk = 25b
-
-# ⬇️ API/SDK 紧跟 2026 年要求，提升到 35 ⬇️
 android.sdk = 34
 android.api = 34
 android.targetsdk = 34
-# 考虑到向下兼容，最低支持到 Android 5.0 (API 21) 或 7.0 (API 24)
 android.minapi = 21
-
 android.build_tools = 34.0.0
 android.accept_sdk_license = True
 
-
+# Permissions
 android.permissions = INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
+# Logging (1=minimal, 2=verbose)
 log_level = 2
 
 [buildozer]
-# 必须加上这一行，强制优化编译逻辑，防止在 Android 环境下崩掉
+# Use setup.py for better dependency resolution
 p4a.extra_args = --use-setup-py
+# Enable logging to help debug build issues
+log_level = 2
