@@ -11,7 +11,8 @@ source.include_exts = py,png,jpg,jpeg,gif,ttf,txt
 fullscreen = 0
 orientation = portrait
 
-requirements = python3,kivy==2.2.1,android
+# 固定 Python 版本以避免 p4a 构建较新 hostpython 导致的 autoreconf 问题
+requirements = python3==3.10.20,kivy==2.2.1,android
 
 # NDK and SDK versions - locked for stability
 android.ndk = 25b
