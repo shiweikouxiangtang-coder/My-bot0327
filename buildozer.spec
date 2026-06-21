@@ -14,6 +14,9 @@ orientation = portrait
 # 固定 Python 版本以避免 p4a 构建较新 hostpython 导致的 autoreconf 问题
 requirements = python3==3.10.20,kivy==2.2.1,android
 
+# 指定单一目标架构以减少构建步骤和潜在问题
+android.arch = armeabi-v7a
+
 # NDK and SDK versions - locked for stability
 android.ndk = 25b
 android.sdk = 34
